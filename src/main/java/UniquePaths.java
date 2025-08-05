@@ -1,4 +1,3 @@
-package com.thealgorithms.dynamicprogramming;
 
 import java.util.Arrays;
 

@@ -1,4 +1,3 @@
-package com.thealgorithms.strings;
 
 import java.util.Stack;
 
