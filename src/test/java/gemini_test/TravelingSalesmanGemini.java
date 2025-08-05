@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * Esta classe visa testar todos os métodos públicos da classe TravelingSalesman,
  * garantindo que todos os cenários e branches de código sejam cobertos.
  */
-class TravelingSalesmanTestGemini {
+class TravelingSalesmanGeminiTest {
 
     // Matriz de distância padrão para 4 cidades, usada em múltiplos testes.
     // O caminho mais curto é 0 -> 1 -> 3 -> 2 -> 0 com distância 80.

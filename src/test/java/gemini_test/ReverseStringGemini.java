@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * Esta classe visa testar todos os métodos públicos da classe ReverseString,
  * garantindo que todos os cenários e branches de código sejam cobertos.
  */
-class ReverseStringTestGemini {
+class ReverseStringGeminiTest {
 
     //region Testes para o método reverse(String)
 

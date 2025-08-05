@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testes para a classe ReverseString")
-class ReverseStringTestGemini0 {
+class ReverseStringGemini0Test {
 
     private static final String NORMAL_STRING = "Hello World";
     private static final String REVERSED_NORMAL_STRING = "dlroW olleH";

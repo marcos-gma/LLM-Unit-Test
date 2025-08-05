@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testes para a classe TravelingSalesman")
-class TravelingSalesmanTestGemini0 {
+class TravelingSalesmanGemini0Test {
 
     // Matriz de distâncias simétrica para 4 cidades.
     // Menor caminho: 0 -> 1 -> 3 -> 2 -> 0, Custo: 10 + 25 + 30 + 15 = 80

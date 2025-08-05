@@ -2,59 +2,36 @@
 
 Este projeto realiza um aprofundamento no artigo "Test Intention Guided LLM-Based Unit Test Generation" (ICSE 2025), explorando a geração de testes unitários com LLMs a partir da intenção do código. A proposta estende o estudo original ao testar diferentes modelos de linguagem (LLMs) e múltiplas linguagens de programação, avaliando a qualidade, cobertura e relevância dos testes gerados em cada cenário. O objetivo é comparar a eficácia dos modelos e entender como a escolha da linguagem influencia os resultados.
 
-## Como rodar o projeto:
+## Como rodar o projeto
 
-### Dependências
+### Pré-requisitos
 
-mvn test
-mvn test -Dtest=ExemploTest
+- [Java 17+](https://adoptium.net/)
+- [Maven 3.8+](https://maven.apache.org/)
 
-## Prompt Utilizado para Geração dos Testes Unitários com Test Intentions
+### Instalação
 
-```java
-/**
- * Você é uma IA especializada em geração de testes unitários para métodos Java.
- * Sua tarefa é gerar testes de alta qualidade para TODOS os métodos públicos de uma classe Java,
- * respeitando os princípios F.I.R.S.T. (Fast, Isolated, Repeatable, Self-validating, Thorough).
- *
- * Para isso, você deve:
- * (1) analisar o código completo da classe fornecida;
- * (2) identificar todos os métodos públicos (incluindo sobrecargas);
- * (3) gerar testes unitários para cada método, criando pelo menos um teste para cada branch identificado;
- * (4) utilizar mocking correto e necessário para isolar dependências e evitar efeitos colaterais;
- * (5) verificar o comportamento de cada método com base no resultado esperado (assert);
- * (6) garantir que cada teste seja independente de outros testes (isolado).
- *
- * Classe alvo:
- * java
- * [INSERIR AQUI O CÓDIGO COMPLETO DA CLASSE]
- *
- * ---
- * Estrutura de cada caso de teste:
- *
- * Case name: [nomeDoMetodo_Cenario_ResultadoEsperado]
- *
- * Input parameter(s):
- * (1) Initialize param1 = [valor ou condição esperada]
- * (2) Initialize param2 = [valor ou condição esperada]
- * ...
- *
- * Mock condition(s):
- * (1) Mock chamada de método estático {classe}.{método} para retornar {valor}
- * (2) Mock instância de {classe}, chamada de método {método} para lançar {exceção} ou retornar {valor}
- * ...
- *
- * Hint specification:
- * (1) Utilize Whitebox.invoke para chamar métodos privados, se necessário.
- * (2) Utilize chamadas específicas ao framework de testes e mock usado no projeto (Mockito, PowerMock, etc).
- *
- * Expected result: [Valor esperado, mensagem, exceção ou estado de retorno do método]
- *
- * ---
- * Diretrizes adicionais:
- * - Siga a estrutura dos testes anteriores encontrados no projeto, se disponíveis.
- * - Respeite a convenção de nomenclatura nomeDoMetodo_Cenario_ResultadoEsperado().
- * - Para métodos com múltiplas condições (if/else, try/catch), crie testes separados por branch.
- * - Gere todos os testes no mesmo arquivo de classe de teste, organizando-os por método alvo.
- */
+Clone o repositório e acesse a pasta do projeto:
+
+```bash
+git clone https://github.com/seu-usuario/LLM-Unit-Test.git
+cd LLM-Unit-Test
 ```
+
+### Executando os testes
+
+Para rodar todos os testes unitários:
+
+```bash
+mvn test
+```
+
+Para rodar apenas uma classe de teste específica (por exemplo, `ExemploTest`):
+
+```bash
+mvn test -Dtest=ExemploTest
+```
+
+### Observações
+
+- Certifique-se de que o Maven e o Java estejam corretamente instalados e configurados no seu PATH.

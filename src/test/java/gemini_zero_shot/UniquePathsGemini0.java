@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Testes para a classe UniquePaths")
-class UniquePathsTestGemini0 {
+class UniquePathsGemini0Test {
 
     @Nested
     @DisplayName("Testes para uniquePaths() - Otimização com Array 1D")
