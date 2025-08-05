@@ -32,6 +32,22 @@ Para rodar apenas uma classe de teste específica (por exemplo, `ExemploTest`):
 mvn test -Dtest=ExemploTest
 ```
 
+## Geração de Relatórios
+
+Para gerar relatórios de teste, utilize um dos comandos abaixo:
+
+```bash
+mvn clean verify
+```
+
+ou, para executar e gerar relatório de uma classe de teste específica (por exemplo, `ReverseStringTest`):
+
+```bash
+mvn clean test -Dtest=ReverseStringTest
+```
+
+Os relatórios serão salvos na pasta `target/surefire-reports`.
+
 ### Observações
 
 - Certifique-se de que o Maven e o Java estejam corretamente instalados e configurados no seu PATH.

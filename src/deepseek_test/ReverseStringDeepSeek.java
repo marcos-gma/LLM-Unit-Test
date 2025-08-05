@@ -1,121 +1,121 @@
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ReverseStringTest {
+import java.util.stream.Stream;
 
-    // Test cases for reverse() method
-    @Test
-    public void reverse_NormalString_ReturnsReversedString() {
-        // Input parameter
-        String input = "hello";
-        
-        // Expected result
-        String expected = "olleh";
-        
-        // Method call
-        String result = ReverseString.reverse(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+@DisplayName("Testes para ReverseString")
+class ReverseStringDeepSeekTest {
+
+    // Testes para o método reverse()
+    @ParameterizedTest(name = "reverse({0}) deve retornar {1}")
+    @MethodSource("provideStringsForReverse")
+    void testReverse(String input, String expected) {
+        assertThat(ReverseString.reverse(input))
+            .as("Verificando reversão da string %s", input)
+            .isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {" ", "  "})
+    void testReverse_EdgeCases(String input) {
+        assertThat(ReverseString.reverse(input))
+            .isEqualTo(input);
+    }
+
+    // Testes para o método reverse2()
+    @ParameterizedTest(name = "reverse2({0}) deve retornar {1}")
+    @MethodSource("provideStringsForReverse")
+    void testReverse2(String input, String expected) {
+        assertThat(ReverseString.reverse2(input))
+            .isEqualTo(expected);
     }
 
     @Test
-    public void reverse_EmptyString_ReturnsEmptyString() {
-        // Input parameter
-        String input = "";
-        
-        // Expected result
-        String expected = "";
-        
-        // Method call
-        String result = ReverseString.reverse(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    @DisplayName("reverse2 deve retornar null para input null")
+    void testReverse2_NullInput() {
+        assertThat(ReverseString.reverse2(null))
+            .isNull();
     }
 
-    // Test cases for reverse2() method
-    @Test
-    public void reverse2_NormalString_ReturnsReversedString() {
-        // Input parameter
-        String input = "world";
-        
-        // Expected result
-        String expected = "dlrow";
-        
-        // Method call
-        String result = ReverseString.reverse2(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    // Testes para o método reverse3()
+    @ParameterizedTest(name = "reverse3({0}) deve retornar {1}")
+    @MethodSource("provideStringsForReverse")
+    void testReverse3(String input, String expected) {
+        assertThat(ReverseString.reverse3(input))
+            .isEqualTo(expected);
     }
 
-    @Test
-    public void reverse2_EmptyString_ReturnsEmptyString() {
-        // Input parameter
-        String input = "";
-        
-        // Expected result
-        String expected = "";
-        
-        // Method call
-        String result = ReverseString.reverse2(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void testReverse3_EmptyAndNull(String input) {
+        assertThat(ReverseString.reverse3(input))
+            .isEqualTo(input);
+    }
+
+    // Testes para o método reverseStringUsingStack()
+    @ParameterizedTest(name = "reverseStringUsingStack({0}) deve retornar {1}")
+    @MethodSource("provideStringsForReverse")
+    void testReverseStringUsingStack(String input, String expected) {
+        assertThat(ReverseString.reverseStringUsingStack(input))
+            .isEqualTo(expected);
     }
 
     @Test
-    public void reverse2_NullString_ReturnsNull() {
-        // Input parameter
-        String input = null;
-        
-        // Expected result
-        String expected = null;
-        
-        // Method call
-        String result = ReverseString.reverse2(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    @DisplayName("reverseStringUsingStack deve lançar exceção para input null")
+    void testReverseStringUsingStack_NullInput() {
+        assertThatThrownBy(() -> ReverseString.reverseStringUsingStack(null))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Input string cannot be null");
     }
 
-    // Test cases for reverse3() method
-    @Test
-    public void reverse3_NormalString_ReturnsReversedString() {
-        // Input parameter
-        String input = "java";
-        
-        // Expected result
-        String expected = "avaj";
-        
-        // Method call
-        String result = ReverseString.reverse3(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    // Testes comparativos entre todos os métodos
+    @ParameterizedTest
+    @MethodSource("provideStringsForAllMethods")
+    void testAllMethodsConsistency(String input) {
+        assertAll(
+            () -> assertThat(ReverseString.reverse(input))
+                .isEqualTo(ReverseString.reverse2(input))
+                .isEqualTo(ReverseString.reverse3(input))
+                .isEqualTo(ReverseString.reverseStringUsingStack(input))
+        );
     }
 
-    @Test
-    public void reverse3_EmptyString_ReturnsEmptyString() {
-        // Input parameter
-        String input = "";
-        
-        // Expected result
-        String expected = "";
-        
-        // Method call
-        String result = ReverseString.reverse3(input);
-        
-        // Assertion
-        assertEquals(expected, result);
+    // Métodos auxiliares para fornecer dados de teste
+    private static Stream<Arguments> provideStringsForReverse() {
+        return Stream.of(
+            Arguments.of("hello", "olleh"),
+            Arguments.of("world", "dlrow"),
+            Arguments.of("Java", "avaJ"),
+            Arguments.of("12345", "54321"),
+            Arguments.of("a", "a"),
+            Arguments.of("madam", "madam"),
+            Arguments.of("hello world", "dlrow olleh"),
+            Arguments.of("with-hyphen", "nehyp-htiw"),
+            Arguments.of("with\nnewline", "enilwen\nhtiw")
+        );
     }
 
-    // Test cases for reverseStringUsingStack() method
-    @Test
+    private static Stream<Arguments> provideStringsForAllMethods() {
+        return Stream.concat(
+            provideStringsForReverse(),
+            Stream.of(
+                Arguments.of(""),
+                Arguments.of(" "),
+                Arguments.of("  ")
+            )
+        );
+    }
+}   @Test
     public void reverseStringUsingStack_NormalString_ReturnsReversedString() {
         // Input parameter
         String input = "stack";
